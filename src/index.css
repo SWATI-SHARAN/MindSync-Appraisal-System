@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 222.2 47% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47% 11.2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47% 11.2%;
+    --primary: 211 100% 32.5%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 213 27% 92%;
+    --secondary-foreground: 222.2 47% 11.2%;
+    --muted: 210 20% 95%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 20% 95%;
+    --accent-foreground: 222.2 47% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 32% 91%;
+    --input: 214.3 32% 91%;
+    --ring: 211 100% 32.5%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 47% 11.2%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 47% 15%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 211 100% 45%;
+    --primary-foreground: 222.2 47% 11.2%;
+    --secondary: 222.2 32.6% 22%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222.2 32.6% 20%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 222.2 32.6% 20%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222.2 32.6% 22%;
+    --input: 222.2 32.6% 22%;
+    --ring: 211 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-slate-900 dark:text-white;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-muted-foreground/30 hover:bg-muted-foreground/50;
+  }
+}
+
+@layer components {
+  /* Enterprise Card */
+  .card-enterprise {
+    @apply bg-card border border-border rounded-lg shadow-enterprise;
+  }
+
+  /* AI Glow Panel -> Styled as a clean recommendation block */
+  .ai-panel {
+    @apply relative overflow-hidden rounded-lg border border-primary/20 bg-primary/5 p-4;
+  }
+
+  /* Metric Card */
+  .metric-card {
+    @apply card-enterprise p-4 flex flex-col gap-1.5;
+  }
+
+  /* Status Badge */
+  .badge-success {
+    @apply inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold
+           bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400;
+  }
+  .badge-warning {
+    @apply inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold
+           bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400;
+  }
+  .badge-danger {
+    @apply inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold
+           bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400;
+  }
+  .badge-info {
+    @apply inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold
+           bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400;
+  }
+  .badge-neutral {
+    @apply inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold
+           bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300;
+  }
+
+  /* PI Score Ring */
+  .pi-ring {
+    @apply relative flex items-center justify-center;
+  }
+
+  /* Sidebar Item */
+  .sidebar-item {
+    @apply flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium
+           transition-all duration-150 cursor-pointer
+           text-muted-foreground hover:text-foreground hover:bg-muted/50;
+  }
+  .sidebar-item.active {
+    @apply bg-primary/5 text-primary border-l-2 border-primary rounded-l-none font-semibold;
+  }
+
+  /* Gradient Text -> Refined to solid clean corporate coloring */
+  .gradient-text {
+    @apply text-primary font-semibold;
+  }
+  .gradient-text-ai {
+    @apply text-slate-800 dark:text-slate-100 font-semibold;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply relative overflow-hidden bg-muted rounded before:absolute before:inset-0
+           before:-translate-x-full before:animate-shimmer
+           before:bg-gradient-to-r before:from-transparent before:via-white/5 before:to-transparent;
+  }
+
+  /* Data Table */
+  .data-table {
+    @apply w-full text-xs border-collapse;
+  }
+  .data-table th {
+    @apply text-left font-semibold uppercase tracking-wider text-muted-foreground
+           px-4 py-2.5 bg-muted/60 border-b border-border/80;
+  }
+  .data-table td {
+    @apply px-4 py-2 border-b border-border/60 align-middle;
+  }
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+  .data-table tr:hover td {
+    @apply bg-muted/40;
+  }
+
+  /* Timeline */
+  .timeline-item {
+    @apply relative pl-6 pb-4 last:pb-0;
+  }
+  .timeline-item::before {
+    content: '';
+    @apply absolute left-2 top-4 bottom-0 w-px bg-border;
+  }
+  .timeline-item:last-child::before {
+    @apply hidden;
+  }
+  .timeline-dot {
+    @apply absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-primary bg-background
+           flex items-center justify-center;
+  }
+
+  /* Stat box */
+  .stat-box {
+    @apply flex flex-col gap-0.5 p-3 rounded border border-border/80 bg-muted/20;
+  }
+
+  /* Validation Step */
+  .validation-step {
+    @apply flex items-center gap-2.5 p-2.5 rounded border transition-all;
+  }
+  .validation-step.completed {
+    @apply bg-green-50/50 dark:bg-green-950/10 border-green-200 dark:border-green-800/20 text-green-900 dark:text-green-300;
+  }
+  .validation-step.pending {
+    @apply bg-amber-50/50 dark:bg-amber-950/10 border-amber-200 dark:border-amber-800/20 text-amber-900 dark:text-amber-300;
+  }
+  .validation-step.waiting {
+    @apply bg-muted/10 border-border/60 text-muted-foreground;
+  }
+
+  /* AI Chat */
+  .chat-bubble-user {
+    @apply ml-auto max-w-xs md:max-w-md px-3.5 py-2 rounded-lg
+           bg-primary text-primary-foreground text-xs;
+  }
+  .chat-bubble-ai {
+    @apply mr-auto max-w-xs md:max-w-md px-3.5 py-2 rounded-lg
+           bg-card border border-border text-foreground text-xs;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .glass {
+    @apply bg-white/5 border border-white/10;
+  }
+  .glass-dark {
+    @apply bg-black/10 border border-white/5;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
